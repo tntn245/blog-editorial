@@ -1,15 +1,23 @@
 import { useState } from 'react';
 import { useToast } from './Toast';
 
+interface Comment {
+  id: number;
+  author: string;
+  content: string;
+  date: string;
+  avatar: string | null;
+}
+
 const Article = () => {
   const { showToast, ToastComponent } = useToast();
   const [likesCount, setLikesCount] = useState(124);
   const [hasLiked, setHasLiked] = useState(false);
-  const [comments, setComments] = useState([
+  const [comments, setComments] = useState<Comment[]>([
     {
       id: 1,
       author: 'Sarah Chen',
-      content: 'This article is incredibly detailed and helpful! I\'m applying Tailwind v4 to my new project and the build speed improvement is noticeable.',
+      content: "This article is incredibly detailed and helpful! I'm applying Tailwind v4 to my new project and the build speed improvement is noticeable.",
       date: '2 days ago',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop'
     },
@@ -23,14 +31,13 @@ const Article = () => {
     {
       id: 3,
       author: 'Alex Kim',
-      content: 'The blog\'s dark mode interface looks incredibly polished and smooth. Looking forward to your article on CSS Container Queries!',
+      content: "The blog's dark mode interface looks incredibly polished and smooth. Looking forward to your article on CSS Container Queries!",
       date: '5 hours ago',
       avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=80&h=80&fit=crop'
     }
   ]);
   const [newCommentText, setNewCommentText] = useState('');
 
-  // Handle like button toggle
   const handleLike = () => {
     if (hasLiked) {
       setLikesCount(prev => prev - 1);
@@ -40,11 +47,10 @@ const Article = () => {
     setHasLiked(!hasLiked);
   };
 
-  // Handle adding new comment
-  const handleAddComment = (e) => {
+  const handleAddComment = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newCommentText.trim()) return;
-    const newComment = {
+    const newComment: Comment = {
       id: Date.now(),
       author: 'Anonymous',
       content: newCommentText.trim(),
@@ -55,7 +61,6 @@ const Article = () => {
     setNewCommentText('');
   };
 
-  // Scroll to comments section
   const scrollToComments = () => {
     document.getElementById('comments-section')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -81,7 +86,6 @@ const Article = () => {
           A deep dive into creating maintainable, themeable, and performant design systems that scale with your team and product.
         </p>
 
-        {/* Meta Info */}
         <div className="flex flex-wrap items-center gap-4 text-sm text-text-tertiary">
           <div className="flex items-center gap-2">
             <img
@@ -121,7 +125,6 @@ const Article = () => {
 
       {/* Article Body */}
       <div className="article-content">
-        {/* Introduction */}
         <section id="introduction">
           <h2>Introduction</h2>
           <p>
@@ -139,7 +142,6 @@ const Article = () => {
           </p>
         </section>
 
-        {/* Design Tokens */}
         <section id="design-tokens">
           <h2>Design Tokens</h2>
           <p>
@@ -164,13 +166,13 @@ const Article = () => {
   --color-primary: #6366f1;
   --color-surface: #ffffff;
   --color-text: #0f172a;
-  
+
   /* Spacing Scale */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-4: 1rem;
   --space-8: 2rem;
-  
+
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -180,7 +182,6 @@ const Article = () => {
           </p>
         </section>
 
-        {/* Component Architecture */}
         <section id="component-architecture">
           <h2>Component Architecture</h2>
           <p>
@@ -229,7 +230,6 @@ function Button({ variant = 'primary', size = 'md', children, ...props }) {
 }`}</code></pre>
         </section>
 
-        {/* Responsive Patterns */}
         <section id="responsive-patterns">
           <h2>Responsive Patterns</h2>
           <p>
@@ -262,7 +262,6 @@ function Button({ variant = 'primary', size = 'md', children, ...props }) {
           </p>
         </section>
 
-        {/* Dark Mode */}
         <section id="dark-mode">
           <h2>Dark Mode Implementation</h2>
           <p>
@@ -298,7 +297,6 @@ function useDarkMode() {
           </p>
         </section>
 
-        {/* Performance */}
         <section id="performance">
           <h2>Performance Considerations</h2>
           <p>
@@ -327,7 +325,6 @@ function useDarkMode() {
           </p>
         </section>
 
-        {/* Accessibility */}
         <section id="accessibility">
           <h2>Accessibility</h2>
           <p>
@@ -355,7 +352,6 @@ function useDarkMode() {
           </blockquote>
         </section>
 
-        {/* Conclusion */}
         <section id="conclusion">
           <h2>Conclusion</h2>
           <p>
@@ -412,7 +408,6 @@ function useDarkMode() {
           </div>
           <button
             onClick={() => {
-              // Copy article link to clipboard
               navigator.clipboard.writeText(window.location.href);
               showToast('Copy link successfully');
             }}
@@ -426,7 +421,7 @@ function useDarkMode() {
         </div>
       </footer>
 
-      {/* Interactive Comments Section */}
+      {/* Comments Section */}
       <section id="comments-section" className="mt-12 pt-8 border-t border-border-primary">
         <h3 className="text-xl font-serif font-bold text-text-primary flex items-center gap-2 mb-6">
           <svg className="h-5 w-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -488,7 +483,6 @@ function useDarkMode() {
         </div>
       </section>
 
-      {/* Toast notification */}
       <ToastComponent />
     </article>
   );

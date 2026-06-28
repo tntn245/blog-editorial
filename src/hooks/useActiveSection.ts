@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-// Hook to track active section in table of contents
-export const useActiveSection = (sectionIds) => {
+export const useActiveSection = (sectionIds: string[]): string => {
   const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export const useActiveSection = (sectionIds) => {
 
     const elements = sectionIds
       .map((id) => document.getElementById(id))
-      .filter(Boolean);
+      .filter(Boolean) as HTMLElement[];
 
     elements.forEach((el) => observer.observe(el));
 

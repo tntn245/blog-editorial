@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 
-// Hook for managing dark mode theme
 export const useDarkMode = () => {
-  const [isDark, setIsDark] = useState(() => {
+  const [isDark, setIsDark] = useState<boolean>(() => {
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
     return true;

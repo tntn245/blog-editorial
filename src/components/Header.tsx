@@ -1,4 +1,9 @@
-const Header = ({ isDark, onToggleTheme }) => {
+interface HeaderProps {
+  isDark: boolean;
+  onToggleTheme: () => void;
+}
+
+const Header = ({ isDark, onToggleTheme }: HeaderProps) => {
   return (
     <header
       className="sticky top-0 z-50 border-b border-border-primary backdrop-blur-2xl bg-surface-primary/70 transition-colors duration-300"
@@ -32,7 +37,6 @@ const Header = ({ isDark, onToggleTheme }) => {
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               id="theme-toggle"
             >
-              {/* Sun Icon */}
               <svg
                 className={`absolute h-5 w-5 text-amber-500 transition-all duration-300 ${
                   isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
@@ -49,7 +53,6 @@ const Header = ({ isDark, onToggleTheme }) => {
                 />
               </svg>
 
-              {/* Moon Icon */}
               <svg
                 className={`absolute h-5 w-5 text-brand-300 transition-all duration-300 ${
                   isDark ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'

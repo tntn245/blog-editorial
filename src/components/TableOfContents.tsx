@@ -1,4 +1,9 @@
-export const sections = [
+interface Section {
+  id: string;
+  title: string;
+}
+
+export const sections: Section[] = [
   { id: 'introduction', title: 'Introduction' },
   { id: 'design-tokens', title: 'Design Tokens' },
   { id: 'component-architecture', title: 'Component Architecture' },
@@ -9,7 +14,11 @@ export const sections = [
   { id: 'conclusion', title: 'Conclusion' },
 ];
 
-const TableOfContents = ({ activeId }) => {
+interface TableOfContentsProps {
+  activeId: string;
+}
+
+const TableOfContents = ({ activeId }: TableOfContentsProps) => {
   return (
     <div className="rounded-2xl border border-border-primary bg-surface-elevated/50 backdrop-blur-sm p-5 transition-all duration-300" style={{ boxShadow: 'var(--shadow-card)' }}>
       <h3 className="text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-4 flex items-center gap-2">

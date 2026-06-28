@@ -1,4 +1,9 @@
-const tags = [
+interface Tag {
+  label: string;
+  color: string;
+}
+
+const tags: Tag[] = [
   { label: 'React', color: 'bg-sky-500/10 text-sky-400 border-sky-500/20 hover:bg-sky-500/20' },
   { label: 'CSS', color: 'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500/20' },
   { label: 'Design Systems', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20' },

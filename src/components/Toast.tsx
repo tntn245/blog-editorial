@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const useToast = () => {
-  const [toast, setToast] = useState(null);
+  const [toast, setToast] = useState<string | null>(null);
 
-  const showToast = (message, duration = 3000) => {
+  const showToast = (message: string, duration = 3000) => {
     setToast(message);
     setTimeout(() => setToast(null), duration);
   };

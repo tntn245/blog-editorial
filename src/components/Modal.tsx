@@ -1,18 +1,20 @@
-// Simple modal component for subscribe success
-const Modal = ({ isOpen, onClose, title, message }) => {
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  message: string;
+}
+
+const Modal = ({ isOpen, onClose, title, message }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-
-      {/* Modal Content */}
       <div className="relative bg-surface-primary rounded-2xl border border-border-primary shadow-xl p-8 max-w-sm mx-4 animate-fade-in">
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-text-tertiary hover:text-text-primary transition-colors"
@@ -23,7 +25,6 @@ const Modal = ({ isOpen, onClose, title, message }) => {
           </svg>
         </button>
 
-        {/* Success Icon */}
         <div className="flex justify-center mb-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 border border-green-500/30">
             <svg className="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -32,17 +33,14 @@ const Modal = ({ isOpen, onClose, title, message }) => {
           </div>
         </div>
 
-        {/* Title */}
         <h3 className="text-xl font-semibold text-text-primary text-center mb-2">
           {title}
         </h3>
 
-        {/* Message */}
         <p className="text-sm text-text-secondary text-center mb-6 leading-relaxed">
           {message}
         </p>
 
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="w-full px-4 py-2.5 bg-gradient-to-r from-brand-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:from-brand-500 hover:to-purple-500 transition-all duration-200 active:scale-95"
