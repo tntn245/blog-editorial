@@ -107,6 +107,7 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 
@@ -228,7 +229,7 @@ body {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
+  width: min(600px, 100vw);
   height: 400px;
   background: radial-gradient(ellipse, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
   pointer-events: none;
